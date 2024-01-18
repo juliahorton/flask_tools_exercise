@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h1>{{question}}</h1>
+
+<form action="/answer" method="POST">
+    <fieldset>
+        <legend>Select your response:</legend>
+        {% for choice in choices %}
+            <input type="radio" name="{{question_number}}" value="{{choice}}" variable="{{choice}}">
+            <label for="{{choice}}">{{choice}}</label>
+        {% endfor %}
+    </fieldset>
+    <button>Next</button>
+</form>
+
+
+{% endblock %}
+

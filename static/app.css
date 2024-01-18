@@ -1,0 +1,36 @@
+body {
+    margin: 0 auto;
+    padding: 0;
+    background-color: lightblue;
+}
+
+#content {
+    margin: 40px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: whitesmoke;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+p {
+    font-size: 20px;
+}
+
+button {
+    display: block;
+    margin-top: 10px;
+    padding: 3px;
+    border-radius: 0px;
+    border-style: groove;
+}
+
+ul {
+    padding-inline-start: 0;
+}
+
+.flashes li {
+    list-style-type: none;
+    padding: 3px;
+    border: 2px solid red;
+    background-color: rgba(255,0,0,0.2)
+}

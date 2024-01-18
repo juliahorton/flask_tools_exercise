@@ -2,7 +2,13 @@ class Question:
     """Question on a questionnaire."""
 
     def __init__(self, question, choices=None, allow_text=False):
-        """Create question (assume Yes/No for choices."""
+        """Create question (assume Yes/No for choices if unspecified).
+
+        Args:
+            question (str): The question to ask the user
+            choices (list, optional): Responses for the user to choose from. Defaults to None.
+            allow_text (bool, optional): Allow/disallow users to enter a text response. Defaults to False.
+        """
 
         if not choices:
             choices = ["Yes", "No"]
