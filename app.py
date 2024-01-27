@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, flash
+from flask import Flask, request, render_template, redirect, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
 from surveys import satisfaction_survey
 
@@ -7,24 +7,30 @@ app.config["SECRET_KEY"] = "psst"
 
 debug = DebugToolbarExtension(app)
 
-responses = []
 title = satisfaction_survey.title
 instructions = satisfaction_survey.instructions
 questions = satisfaction_survey.questions
 curr_question = 0
-
 
 @app.route("/")
 def begin_survey():
     """When the user goes to the root route, render a page that shows the user the title of the survey, the instructions, and a button to start the survey"""
     return render_template("/index.html", title=title, instructions=instructions)
 
+@app.route("/initialize-responses", methods=["POST"])
+def initialize_responses():
+    """Sets session["responses"] to an empty list"""
+    session["responses"] = []
+    return redirect("/questions/0")
+
 @app.route("/answer", methods=["POST"])
 def record_answer():
     """Record the user's answer to the question and add value to responses list before redirecting user either to the next question (if there are questions remaining) or to a thank you page (if the user has answered all questions)"""
     global curr_question
     answer = request.form.get(str(curr_question))
+    responses = session["responses"]
     responses.append(answer)
+    session["responses"] = responses
     curr_question += 1
     if curr_question < len(questions):
         return redirect(f"/questions/{curr_question}")
